@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Генерація квадратиків</title>
+    <style>
+        .square {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Введіть 0 та 1:</h2>
+    <textarea id="binaryInput" rows="4" cols="50"></textarea>
+    <button onclick="generateSquares()">Генерувати квадратики</button>
+    <div id="squaresContainer"></div>
+
+    <script>
+        function generateSquares() {
+            const inputText = document.getElementById('binaryInput').value.trim(); // Отримуємо введені дані без пробілів
+            const lines = inputText.split('\n'); // Розділяємо введені рядки
+
+            const squaresContainer = document.getElementById('squaresContainer');
+            squaresContainer.innerHTML = ''; // Очищаємо контейнер перед новими квадратиками
+
+            lines.forEach(line => {
+                const row = document.createElement('div'); // Створюємо новий рядок
+                line.split('').forEach(char => {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+                    square.style.backgroundColor = char === '0' ? 'black' : 'white';
+                    row.appendChild(square);
+                });
+                squaresContainer.appendChild(row);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

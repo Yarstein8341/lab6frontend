@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Форум</title>
+</head>
+
+<body>
+    <h1>Форум</h1>
+
+    <table id="messageList">
+        <thead>
+            <tr>
+                <th>Ім'я</th>
+                <th>Повідомлення</th>
+                <th>Час надсилання</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+    <h2>Додати нове повідомлення</h2>
+    <form id="messageForm">
+        <label for="username">Ім'я:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="message">Повідомлення:</label><br>
+        <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Додати повідомлення">
+    </form>
+
+    <script>
+        const messageForm = document.getElementById('messageForm');
+        const messageList = document.querySelector('#messageList tbody');
+
+        messageForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = messageForm.elements['username'].value;
+            const message = messageForm.elements['message'].value;
+
+            if (username && message) {
+                const now = new Date();
+                const timestamp = now.toLocaleString();
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${username}</td>
+                    <td>${message}</td>
+                    <td>${timestamp}</td>
+                `;
+                messageList.appendChild(newRow);
+
+                messageForm.reset();
+            } else {
+                alert("Будь ласка, заповніть усі поля");
+            }
+        });
+    </script>
+</body>
+
+</html>

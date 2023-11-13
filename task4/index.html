@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Блоки з можливістю редагування та видалення</title>
+    <style>
+        .block {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .editMode {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blocks">
+        <div class="block">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <button class="editButton">Редагувати</button>
+            <button class="deleteButton">Видалити</button>
+        </div>
+
+        <div class="block">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <button class="editButton">Редагувати</button>
+            <button class="deleteButton">Видалити</button>
+        </div>
+
+        <div class="block">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <button class="editButton">Редагувати</button>
+            <button class="deleteButton">Видалити</button>
+        </div>
+    </div>
+
+    <script>
+        const blocks = document.querySelectorAll('.block');
+
+        blocks.forEach(block => {
+            const editButton = block.querySelector('.editButton');
+            const deleteButton = block.querySelector('.deleteButton');
+            const paragraph = block.querySelector('p');
+            let isEditMode = false;
+
+            editButton.addEventListener('click', () => {
+                if (isEditMode) return;
+
+                isEditMode = true;
+                block.classList.add('editMode');
+
+                const textarea = document.createElement('textarea');
+                textarea.value = paragraph.textContent;
+                block.replaceChild(textarea, paragraph);
+
+                textarea.focus();
+
+                textarea.addEventListener('blur', () => {
+                    isEditMode = false;
+                    block.classList.remove('editMode');
+                    const newParagraph = document.createElement('p');
+                    newParagraph.textContent = textarea.value;
+                    block.replaceChild(newParagraph, textarea);
+                });
+            });
+
+            deleteButton.addEventListener('click', () => {
+                block.remove();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

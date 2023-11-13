@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Гральні карти</title>
+    <style>
+        .card {
+            width: 200px;
+            height: 300px;
+            background: url('back_of_card.jpg') center/cover;
+            cursor: pointer;
+            transition: transform 1s;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" onclick="flipCard(this)"></div>
+
+    <script>
+        let isFlipped = false;
+        let isFlipping = false;
+
+        function flipCard(card) {
+            if (!isFlipping) {
+                isFlipping = true;
+                if (!isFlipped) {
+                    card.style.transform = "rotateY(90deg)";
+                    setTimeout(() => {
+                        card.style.backgroundImage = "url('front_of_card.jpg')";
+                        card.style.transform = "rotateY(180deg)";
+                        isFlipped = true;
+                        isFlipping = false;
+                    }, 1000);
+                } else {
+                    card.style.transform = "rotateY(90deg)";
+                    setTimeout(() => {
+                        card.style.backgroundImage = "url('back_of_card.jpg')";
+                        card.style.transform = "rotateY(0)";
+                        isFlipped = false;
+                        isFlipping = false;
+                    }, 1000);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

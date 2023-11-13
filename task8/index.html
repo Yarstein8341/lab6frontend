@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Список книг</title>
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Список книг</h1>
+    <ul>
+        <li id="book1">«Володар кілець» Джон Р. Р. Толкін</li>
+        <li id="book2">«Гордість і упередження» Джейн Остін</li>
+        <li id="book3">«Темні початки» Філіп Пулман</li>
+        <li id="book4">«Автостопом по галактиці» Дуглас Адамс</li>
+        <li id="book5">«Гаррі Поттер і Кубок вогню» Джоан Роулінг</li>
+        <li id="book6">«Вбити пересмішника» Харпер Лі</li>
+    </ul>
+
+    <script>
+        const books = document.querySelectorAll('li');
+
+        books.forEach(book => {
+            book.addEventListener('click', () => {
+                if (book.classList.contains('green')) {
+                    book.classList.remove('green');
+                } else {
+                    books.forEach(otherBook => {
+                        otherBook.classList.remove('green');
+                    });
+                    book.classList.add('green');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Палітра кольорів і заливка прямокутника</title>
+    <style>
+        .color {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+        .rectangle {
+            width: 300px;
+            height: 150px;
+            margin-top: 20px;
+            border: 1px solid #000;
+            background: linear-gradient(to right, #000, #fff);
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Виберіть кольори:</h2>
+    <div id="colors">
+        <div class="color" style="background-color: #660000;"></div>
+        <div class="color" style="background-color: #ff0000;"></div>
+        <div class="color" style="background-color: #ff6600;"></div>
+        <div class="color" style="background-color: #ffff00;"></div>
+        <div class="color" style="background-color: #66cc00;"></div>
+        <div class="color" style="background-color: #009900;"></div>
+        <div class="color" style="background-color: #0099cc;"></div>
+        <div class="color" style="background-color: #003399;"></div>
+        <div class="color" style="background-color: #000066;"></div>
+    </div>
+
+    <div class="rectangle"></div>
+
+    <script>
+        const colors = document.querySelectorAll('.color');
+        const rectangle = document.querySelector('.rectangle');
+        let selectedColors = [];
+
+        colors.forEach(color => {
+            color.addEventListener('click', () => {
+                const clickedColor = color.style.backgroundColor;
+                const index = selectedColors.indexOf(clickedColor);
+
+                if (index === -1) {
+                    selectedColors.push(clickedColor);
+                } else {
+                    selectedColors.splice(index, 1);
+                }
+
+                if (selectedColors.length === 0) {
+                    rectangle.style.background = 'linear-gradient(to right, #000, #fff)';
+                } else if (selectedColors.length === 1) {
+                    rectangle.style.backgroundColor = selectedColors[0];
+                } else {
+                    rectangle.style.background = `linear-gradient(to right, ${selectedColors.join()}, #fff)`;
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
